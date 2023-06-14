@@ -1,3 +1,32 @@
+import random
+
+import numpy as np
+import tensorflow as tf
+from keras import layers, regularizers
+from keras.backend import concatenate
+from matplotlib import pyplot as plt
+from numpy.distutils.command.build import build
+from tensorflow import keras
+from keras.layers import SimpleRNN, Input
+from keras.optimizers import SGD, Adam
+import pandas as pd
+from keras.constraints import max_norm,MinMaxNorm
+from keras.regularizers import l2
+
+
+
+import CTRNNLIB.GenericFunctions
+from CTRNNLIB import GenericFunctions
+from CTRNNLIB.Recurrent import SimpleMEMSCTRNN
+from CTRNNLIB.Recurrent import ShuttleCTRNN,RealShuttleCTRNN
+from CTRNNLIB.Recurrent import SimpleRNN
+from CTRNNLIB.shuttleDesignTest import Generate_Data_Module
+from CTRNNLIB.shuttleDesignTest.Generate_Data_Module import generate_training_data
+
+windowSize = 1
+
+
+
 def train_deniosing_problem_MEMS_window_stateful_seq_to_seq(factor=1, window_size=10, shift=0):
     number_of_features = 1
     batch_size_=1
@@ -93,4 +122,10 @@ def train_deniosing_problem_MEMS_window_stateful_seq_to_seq(factor=1, window_siz
     plt.plot(output.reshape(-1), 'b',alpha=.8)
     plt.show()
 
-    #testMode_modified(model, factor, shift=shift, window_size=window_size, batch_size=batch_size_)
+
+
+if __name__ == '__main__':
+
+    window_size_arg=100
+    factor_arg=0.1
+    train_deniosing_problem_MEMS_window_stateful_seq_to_seq(factor=factor_arg, window_size=window_size_arg, shift=0)
