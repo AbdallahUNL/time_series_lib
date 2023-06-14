@@ -27,6 +27,8 @@ windowSize = 1
 
 
 
+
+
 def train_deniosing_problem_MEMS_window_stateful_seq_to_seq(factor=1, window_size=10, shift=0):
     number_of_features = 1
     batch_size_=1
