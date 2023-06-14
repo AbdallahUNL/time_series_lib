@@ -11,6 +11,7 @@ def function_generator(training=True, noise_multiplier=.25, N=5, sample_delay=0.
   A= 0.5 * np.random.random(size=N)
   #delta=2*np.pi *(np.random.random(size=N)-0.5)#
   delta = 2 * np.pi * (np.random.random(size=N))
+  #omega=1.33334+0.17776*np.random.random(size=N)
   omega=0.8+0.4 * np.random.random(size=N)
   #omega=0.008+.04*np.random.random(size=N)
   #omega=omega*frequecny_factor
@@ -34,11 +35,11 @@ def function_generator(training=True, noise_multiplier=.25, N=5, sample_delay=0.
 
 
 
-def generate_training_data(num_of_generator=16, signal_frequency=300, window_size=1, rows=10000, MEMS_freq=10**-6, enviroment_end_time=3392*10**-6):#number of generator =number of batch-size
+def generate_training_data(num_of_generator=16, signal_frequency=300, window_size=1, rows=10000, MEMS_freq=10**-6, enviroment_end_time=3392*10**-6,N_=5):#number of generator =number of batch-size
     generators_lst=[]
     enviroment_end_time=int(enviroment_end_time*10**6)
     for i in range(num_of_generator):
-        generators_lst.append(function_generator(training=True, noise_multiplier=.25, N=5, sample_delay=MEMS_freq,
+        generators_lst.append(function_generator(training=True, noise_multiplier=.25, N=N_, sample_delay=MEMS_freq,
                                                  gen_samples=enviroment_end_time, freq_gt=signal_frequency))
     noiesedList = []
     groundTruthList=[]
@@ -66,7 +67,19 @@ def generate_training_data(num_of_generator=16, signal_frequency=300, window_siz
     #plt.plot(noiesedList.reshape(-1))
     return noiesedList,groundTruthList
 
+import matplotlib.pyplot as plt
 
+#data=generate_training_data(window_size=10,num_of_generator=5)
+#data.to_csv("./NewTrainingData/10window_size_32generators.csv", header=False, index=False)
+#testing=generate_testing_data(num_of_generator=1,window_size=10,rows=10000,MEMS_freq=10**-6)
+#testing.to_csv("./NewTrainingData/testing_10window_size.csv", header=False, index=False)
+
+#
+# plt.plot(testing[0],'-')
+#
+# plt.plot(testing[1])
+#
+# plt.show()
 
 
 
